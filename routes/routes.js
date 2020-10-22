@@ -14,13 +14,13 @@ module.exports = app => {
         // API ROUTES
         // ========================================================
     
-        // Setup the /api/notes get route
+        // /api/notes get route
         app.get("/api/notes", function(req, res) {
             // Read the db.json file and return all saved notes as JSON.
             res.json(notes);
         });
 
-        // Setup the /api/notes post route
+        // /api/notes post route
         app.post("/api/notes", function(req, res) {
             // Receives a new note, adds it to db.json, then returns the new note
             let newNote = req.body;
@@ -31,7 +31,7 @@ module.exports = app => {
 
         // Retrieves a note with specific id
         app.get("/api/notes/:id", function(req,res) {
-            // display json for the notes array indices of the provided id
+            // display json for the provided id
             res.json(notes[req.params.id]);
         });
 
@@ -45,17 +45,17 @@ module.exports = app => {
         // VIEW ROUTES
         // ========================================================
 
-        // Display notes.html when /notes is accessed
+        // Display notes.html
         app.get('/notes', function(req,res) {
             res.sendFile(path.join(__dirname, "../public/notes.html"));
         });
         
-        // Display index.html when all other routes are accessed
+        // Display index.html 
         app.get('*', function(req,res) {
             res.sendFile(path.join(__dirname, "../public/index.html"));
         });
 
-        //updates the json file whenever a note is added or deleted
+        //updates the json file 
         function updateDb() {
             fs.writeFile("db/db.json",JSON.stringify(notes,'\n'),err => {
                 if (err) throw err;
